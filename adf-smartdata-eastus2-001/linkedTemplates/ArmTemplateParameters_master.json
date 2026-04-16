@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-smartdata-eastus2-001"
+		},
+		"ls_adlssmartdataeastus2001_accountKey": {
+			"value": ""
+		},
+		"ls_adlssmartdataeastus2002_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0403-005840-zuanm5fl"
+		},
+		"ls_Rest_properties_typeProperties_url": {
+			"value": "https://pokeapi.co/api/v2/pokemon"
+		},
+		"ls_adlssmartdataeastus2001_properties_typeProperties_url": {
+			"value": "https://adlssmartdataeastus2001.dfs.core.windows.net/"
+		},
+		"ls_adlssmartdataeastus2002_properties_typeProperties_url": {
+			"value": "https://adlssmartdataeastus2002.dfs.core.windows.net/"
+		},
+		"ls_db_ansh_lamba_properties_typeProperties_server": {
+			"value": "server-anshlamba-adf-course.database.windows.net"
+		},
+		"ls_db_ansh_lamba_properties_typeProperties_database": {
+			"value": "db-anshlamba-adf-course"
+		},
+		"ls_db_ansh_lamba_properties_typeProperties_userName": {
+			"value": "mikoto"
+		},
+		"ls_smartdata_eastus2_001_properties_typeProperties_baseUrl": {
+			"value": "https://kv-smartdata-eastus2-001.vault.azure.net/"
+		},
+		"tg_trigger_event_properties_typeProperties_scope": {
+			"value": "/subscriptions/d26337fa-6c34-43cc-8f3e-eaae513f82e6/resourceGroups/smart_data/providers/Microsoft.Storage/storageAccounts/adlssmartdataeastus2002"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
