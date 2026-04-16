@@ -1,0 +1,16 @@
+{
+	"name": "dts_db_ansh_lamba",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_db_ansh_lamba",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ansh_lamba"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

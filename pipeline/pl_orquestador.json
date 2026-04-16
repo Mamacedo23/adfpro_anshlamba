@@ -1,0 +1,52 @@
+{
+	"name": "pl_orquestador",
+	"properties": {
+		"activities": [
+			{
+				"name": "copy_data",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "copy_data",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "pl_adf_to_adb",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "copy_data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_adf_to_adb",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "smart_data/clase09"
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-04-13T05:17:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

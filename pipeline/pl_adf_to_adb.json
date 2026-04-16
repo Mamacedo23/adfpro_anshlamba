@@ -1,0 +1,208 @@
+{
+	"name": "pl_adf_to_adb",
+	"properties": {
+		"activities": [
+			{
+				"name": "PrepAmb",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/railgun@accelidol2gmail.onmicrosoft.com/smart_data/sesion08/1.- Preparacion_Ambiente",
+					"baseParameters": {
+						"storageName": "adlssmartdataeastus2001"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_circuits",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "PrepAmb",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/railgun@accelidol2gmail.onmicrosoft.com/smart_data/sesion08/2.- Ingest circuits data",
+					"baseParameters": {
+						"storageName": "adlssmartdataeastus2001"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_constructors",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "PrepAmb",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/railgun@accelidol2gmail.onmicrosoft.com/smart_data/sesion08/2.- Ingest Constructors",
+					"baseParameters": {
+						"storageName": "adlssmartdataeastus2001",
+						"container": "raw",
+						"catalogo": "catalog_au",
+						"esquema": "bronze"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Ingest_racing",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "PrepAmb",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/railgun@accelidol2gmail.onmicrosoft.com/smart_data/sesion08/2.- Ingest racing data",
+					"baseParameters": {
+						"storageName": "adlssmartdataeastus2001",
+						"container": "raw",
+						"catalogo": "catalog_au",
+						"esquema": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "transform",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Ingest_racing",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Ingest_constructors",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Ingest_circuits",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/railgun@accelidol2gmail.onmicrosoft.com/smart_data/sesion08/3.- Transform",
+					"baseParameters": {
+						"catalogo": "catalog_au",
+						"esquema_sink": "silver",
+						"esquema_source": "bronze"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "load",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "transform",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/railgun@accelidol2gmail.onmicrosoft.com/smart_data/sesion08/4.- Load",
+					"baseParameters": {
+						"catalogo": "catalog_au",
+						"esquema_sink": "golden",
+						"esquema_source": "silver"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "smart_data/clase09"
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-04-13T05:17:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

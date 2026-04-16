@@ -1,0 +1,24 @@
+{
+	"name": "tr_scheduled",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_adf_to_adb",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2026-04-18T02:31:00",
+				"timeZone": "SA Pacific Standard Time"
+			}
+		}
+	}
+}

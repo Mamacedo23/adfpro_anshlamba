@@ -1,0 +1,20 @@
+{
+	"name": "AzureDatabricks1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-7405607937234478.18.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_smartdata_eastus2_001",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ws-smartdata"
+			},
+			"existingClusterId": "0403-005840-zuanm5fl"
+		}
+	}
+}
